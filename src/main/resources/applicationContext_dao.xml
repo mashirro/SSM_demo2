@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 自动扫描,生成Mapper接口的代理对象并注入到Spring,Mapper接口不需要@Repository注解 -->
+	<bean id="mapperScannerConfigurer"
+		class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.baidu.mapper"></property>
+	</bean>
+
+	<!-- 配置c3p0数据源 -->
+	<bean id="dataSource"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<!--连接mysql数据库的必备信息 -->
+		<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+		<property name="jdbcUrl"
+			value="jdbc:mysql://localhost:3306/shiro"></property>
+		<property name="user" value="root"></property>
+		<property name="password" value="root"></property>
+	</bean>
+
+	<!-- 把SqlSessionFactory交给IOC管理,SqlSessionFactoryBean 用于创建 SqlSessionFactory -->
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<!-- mybatis配置文件路径 
+		<property name="configLocation" value=""></property>		-->
+		<!-- xml映射文件路径 -->
+		<property name="mapperLocations" value="classpath:mappers/*.xml"></property>
+		
+		<!-- 在spring配置文件中配置拦截器插件<mybatis分页插件> -->
+		<property name="plugins">
+			<array>
+				<bean class="com.github.pagehelper.PageInterceptor">
+					<property name="properties">
+						<!--使用下面的方式配置参数，一行配置一个 -->
+						<value>
+							helperDialect=mysql
+							reasonable=true	<!-- 分页合理化 -->
+							supportMethodsArguments=true<!-- 支持通过 Mapper 接口参数来传递分页参数 -->
+						</value>
+					</property>
+				</bean>
+			</array>
+		</property>
+	</bean>
+</beans>

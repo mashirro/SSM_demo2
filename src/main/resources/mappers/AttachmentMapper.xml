@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baidu.mapper.AttachmentMapper" >
+  <resultMap id="BaseResultMap" type="com.baidu.entity.Attachment" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="wjm" property="wjm" jdbcType="VARCHAR" />
+    <result column="fjmc" property="fjmc" jdbcType="VARCHAR" />
+    <result column="fjlj" property="fjlj" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, wjm, fjmc, fjlj
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from fjb
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from fjb
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.baidu.entity.Attachment" >
+    insert into fjb (id, wjm, fjmc, 
+      fjlj)
+    values (#{id,jdbcType=VARCHAR}, #{wjm,jdbcType=VARCHAR}, #{fjmc,jdbcType=VARCHAR}, 
+      #{fjlj,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.baidu.entity.Attachment" >
+    insert into fjb
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="wjm != null" >
+        wjm,
+      </if>
+      <if test="fjmc != null" >
+        fjmc,
+      </if>
+      <if test="fjlj != null" >
+        fjlj,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="wjm != null" >
+        #{wjm,jdbcType=VARCHAR},
+      </if>
+      <if test="fjmc != null" >
+        #{fjmc,jdbcType=VARCHAR},
+      </if>
+      <if test="fjlj != null" >
+        #{fjlj,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.baidu.entity.Attachment" >
+    update fjb
+    <set >
+      <if test="wjm != null" >
+        wjm = #{wjm,jdbcType=VARCHAR},
+      </if>
+      <if test="fjmc != null" >
+        fjmc = #{fjmc,jdbcType=VARCHAR},
+      </if>
+      <if test="fjlj != null" >
+        fjlj = #{fjlj,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.baidu.entity.Attachment" >
+    update fjb
+    set wjm = #{wjm,jdbcType=VARCHAR},
+      fjmc = #{fjmc,jdbcType=VARCHAR},
+      fjlj = #{fjlj,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
