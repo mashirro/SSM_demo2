@@ -79,7 +79,7 @@ public class FileUploadController {
 			//将附件id返回----->下载时使用
 			return ReturnMessage.success(attachmentId);
 		} catch (IOException e) {
-			logger.error("附件上传失败:"+e);
+			logger.error("附件上传失败,请联系管理员:"+e);
 			return ReturnMessage.error("附件上传失败!");
 		}
 	}
