@@ -99,6 +99,7 @@ public class FileUploadController {
 		if(file.exists()) {
 			FileUtil.downloadAttachment(response, realPath, attachment.getWjm());
 		}else {
+			logger.error("文件不存在:下载失败!");
 		}
 	}
 }
