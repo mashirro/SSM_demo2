@@ -61,7 +61,6 @@ public class FileUploadController {
 	public ReturnMessage<String> fileUpload(MultipartFile file) {
 		//生成附件id
 		String attachmentId = UUID.randomUUID().toString();
-		System.out.println(attachmentId);
 		try {
 			//上传附件到服务器
 			FileUploadDTO uploadDTO = FileUtil.uploadAttachment(file.getInputStream(), file.getOriginalFilename());
@@ -88,6 +87,7 @@ public class FileUploadController {
 	 */
 	@RequestMapping("/download")
 	public void download(String id,HttpServletResponse response){
+		logger.info("入参【获取下载文件id：id=" + id + "】");
 		Attachment attachment = attachmentService.selectById(id);
 		// 文件在服务器上保存的真实路径
 		String realPath = attachment.getFjlj().concat(File.separator).concat(attachment.getFjmc());
