@@ -61,6 +61,7 @@ public class FileUploadController {
 	public ReturnMessage<String> fileUpload(MultipartFile file) {
 		//生成附件id
 		String attachmentId = UUID.randomUUID().toString();
+		System.out.println(attachmentId);
 		try {
 			//上传附件到服务器
 			FileUploadDTO uploadDTO = FileUtil.uploadAttachment(file.getInputStream(), file.getOriginalFilename());
