@@ -89,6 +89,7 @@ public class FileUploadController {
 	@RequestMapping("/download")
 	public void download(String id,HttpServletResponse response){
 		Attachment attachment = attachmentService.selectById(id);
+		System.out.println(attachment);
 		// 文件在服务器上保存的真实路径
 		String realPath = attachment.getFjlj().concat(File.separator).concat(attachment.getFjmc());
 		File file = new File(realPath);
