@@ -14,4 +14,13 @@ public interface FunctionService {
 	 */
 	List<Function> getParentMenuList();
 
+	/**
+	 * 根据parentId获取子菜单list
+	 * @author chenzg
+	 * @date 2019年9月6日 下午4:47:12 
+	 * @param parentId
+	 * @return
+	 */
+	List<Function> getChildren(String parentId);
+
 }

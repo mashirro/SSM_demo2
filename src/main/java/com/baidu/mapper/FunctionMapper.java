@@ -24,4 +24,13 @@ public interface FunctionMapper {
      * @return
      */
 	List<Function> getParentMenuList();
+
+	/**
+	 * 根据parentId获取子菜单list
+	 * @author chenzg
+	 * @date 2019年9月6日 下午4:47:54 
+	 * @param parentId
+	 * @return
+	 */
+	List<Function> getChildren(String parentId);
 }

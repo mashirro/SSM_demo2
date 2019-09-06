@@ -20,4 +20,9 @@ public class FunctionServiceImpl implements FunctionService{
 	public List<Function> getParentMenuList() {
 		return functionMapper.getParentMenuList();
 	}
+
+	@Override
+	public List<Function> getChildren(String parentId) {
+		return functionMapper.getChildren(parentId);
+	}
 }

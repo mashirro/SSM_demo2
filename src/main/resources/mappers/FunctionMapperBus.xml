@@ -6,4 +6,10 @@
 		where parentid = '' or parentid is null
 		order by sort_number
 	</select>
+	
+	<select id="getChildren" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select * from function
+		where parentid = #{parentId,jdbcType=VARCHAR}
+		order by sort_number
+	</select>
 </mapper>
