@@ -2,12 +2,8 @@ package com.baidu.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.UUID;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.baidu.entity.Attachment;
 import com.baidu.entity.FileUploadDTO;
 import com.baidu.entity.ReturnMessage;
@@ -66,6 +61,7 @@ public class FileUploadController {
 	public ReturnMessage<String> fileUpload(MultipartFile file) {
 		//生成附件id
 		String attachmentId = UUID.randomUUID().toString();
+		System.out.println(attachmentId);
 		try {
 			//上传附件到服务器
 			FileUploadDTO uploadDTO = FileUtil.uploadAttachment(file.getInputStream(), file.getOriginalFilename());
@@ -79,7 +75,7 @@ public class FileUploadController {
 			//将附件id返回----->下载时使用
 			return ReturnMessage.success(attachmentId);
 		} catch (IOException e) {
-			logger.error("附件上传失败:"+e);
+			logger.error("附件上传失败,请联系管理员:"+e);
 			return ReturnMessage.error("附件上传失败!");
 		}
 	}
@@ -93,12 +89,14 @@ public class FileUploadController {
 	@RequestMapping("/download")
 	public void download(String id,HttpServletResponse response){
 		Attachment attachment = attachmentService.selectById(id);
+		System.out.println(attachment);
 		// 文件在服务器上保存的真实路径
 		String realPath = attachment.getFjlj().concat(File.separator).concat(attachment.getFjmc());
 		File file = new File(realPath);
 		if(file.exists()) {
 			FileUtil.downloadAttachment(response, realPath, attachment.getWjm());
 		}else {
+			logger.error("文件不存在:下载失败!");
 		}
 	}
 }
