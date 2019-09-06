@@ -19,7 +19,7 @@ public class FunctionController {
 	private FunctionService functionService;
 
 	/**
-	 * 获取树形菜单list
+	 * 获取根节点list
 	 * @author chenzg
 	 * @date 2019年9月6日 下午3:40:39 
 	 * @return
@@ -27,7 +27,8 @@ public class FunctionController {
 	@ResponseBody
 	@RequestMapping("/getMenuList")
 	public List<Function> getMenuList(){
-		
+		//先获取顶级节点list
+		List<Function> parentList = functionService.getParentMenuList();
 		return null;
 	}
 }

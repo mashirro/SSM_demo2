@@ -1,5 +1,7 @@
 package com.baidu.mapper;
 
+import java.util.List;
+
 import com.baidu.entity.Function;
 
 public interface FunctionMapper {
@@ -14,4 +16,12 @@ public interface FunctionMapper {
     int updateByPrimaryKeySelective(Function record);
 
     int updateByPrimaryKey(Function record);
+
+    /**
+     * 获取根节点list
+     * @author chenzg
+     * @date 2019年9月6日 下午3:57:26 
+     * @return
+     */
+	List<Function> getParentMenuList();
 }
