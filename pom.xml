@@ -34,13 +34,6 @@
 		    <version>2.10.6</version>
 		</dependency>
 		
-		<!-- spring-data-redis -->
-		<dependency>
-		    <groupId>org.springframework.data</groupId>
-		    <artifactId>spring-data-redis</artifactId>
-		    <version>2.1.10.RELEASE</version>
-		</dependency>
-		
 		<!-- mybatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -127,6 +120,7 @@
 
 		<!-- 进行json转换时需要 -->
 		<!-- 同时引入jackson-core,jackson-annotations依赖 -->
+		<!-- GenericJackson2JsonRedisSerializer序列化器需要使用jackson包 -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
